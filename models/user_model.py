@@ -1,6 +1,6 @@
+from models.image_model import ImageModel
 from sqlalchemy import Integer, Column, String, DateTime, Boolean
 from sqlalchemy.orm import relationship
-
 from database import Base
 
 

@@ -1,10 +1,11 @@
 import json
 from datetime import datetime
+import socket
 
 import aio_pika
 import asyncio
 from database import async_session_maker
-from rabbit.models.logs_model import LogsModel
+from models.logs_model import LogsModel
 
 
 class Consumer:
@@ -13,7 +14,7 @@ class Consumer:
         self.connection = None
 
     async def set_pika_connection(self, ):
-        self.connection = await aio_pika.connect_robust(host='localhost', port=5672)
+        self.connection = await aio_pika.connect_robust(host="micro_auth_python-rabbitmq-1", port=5672)
         self.channel = await self.connection.channel()
         await self.channel.set_qos(prefetch_count=10)
 
@@ -40,7 +41,7 @@ class Consumer:
             log = LogsModel(datetime_open=datatime, **data)
             session.add(log)
             await session.commit()
-            queue.delete()
+            await queue.delete()
 
 
 async def main():

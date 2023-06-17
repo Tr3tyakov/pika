@@ -1,6 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, DateTime
-
 from database import Base
+from models.user_model import UserModel
+from models.headline_model import HeadlineModel
 
 
 class LogsModel(Base):
