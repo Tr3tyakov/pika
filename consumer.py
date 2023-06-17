@@ -41,7 +41,6 @@ class Consumer:
             log = LogsModel(datetime_open=datatime, **data)
             session.add(log)
             await session.commit()
-            await queue.delete()
 
 
 async def main():
